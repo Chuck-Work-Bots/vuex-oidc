@@ -92,7 +92,7 @@ export default (oidcSettings, storeSettings = {}, oidcEventListeners = {}) => {
   }
 
   const routeIsPublic = (route) => {
-    if (route.meta && route.meta.isPublic) {
+    if (route.meta && route.meta.reduce((isPublic, meta) => meta.isPublic || isPublic, false)) {
       return true
     }
     if (storeSettings.publicRoutePaths) {
